@@ -18,7 +18,10 @@ namespace Negocio
             var data = JsonConvert.DeserializeObject<List<Alumno>>(response);
             return data;
         }
-
+        public async static Task<Boolean> Add(Alumno a)
+        {
+            var response = await Conexion.Instancia.Cliente.PostAsJsonAsync("https://localhost:7087/api/alumno", a);
+            return response.IsSuccessStatusCode;
+        }
     }
 }
-// hecho hasta diap 7 https://drive.google.com/file/d/1rUydoORVQA6VMV3A-PvMd7sx1VvvXPzq/edit

@@ -23,5 +23,15 @@ namespace Negocio
             var response = await Conexion.Instancia.Cliente.PostAsJsonAsync("https://localhost:7087/api/alumno", a);
             return response.IsSuccessStatusCode;
         }
+        public async static Task<Boolean> Delete(Alumno a)
+        {
+            var response = await Conexion.Instancia.Cliente.DeleteAsync("https://localhost:7087/api/alumno/" + a.DNI);
+            return response.IsSuccessStatusCode;
+        }
+        public async static Task<Boolean> Update(Alumno a)
+        {
+            var response = await Conexion.Instancia.Cliente.PutAsJsonAsync("https://localhost:7087/api/alumno/" + a.DNI, a);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

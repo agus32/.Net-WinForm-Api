@@ -18,6 +18,12 @@ namespace Negocio
             var data = JsonConvert.DeserializeObject<List<Alumno>>(response);
             return data;
         }
+        public async static Task<IEnumerable<Alumno>> GetByDesc(string desc)
+        {
+            var response = await Conexion.Instancia.Cliente.GetStringAsync("https://localhost:7087/api/alumno/GetByDesc/" + desc);
+            var data = JsonConvert.DeserializeObject<List<Alumno>>(response);
+            return data;
+        }
         public async static Task<Boolean> Add(Alumno a)
         {
             var response = await Conexion.Instancia.Cliente.PostAsJsonAsync("https://localhost:7087/api/alumno", a);

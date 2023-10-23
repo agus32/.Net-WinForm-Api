@@ -13,8 +13,15 @@ namespace ClienteServicios
         }
         public IEnumerable<Alumno> getTabla()
         {
-            l = AlumnoNegocio.GetAll();
+            if(txtBuscar.Text != "" && txtBuscar.Text!= null)
+            {
+
+                l= AlumnoNegocio.GetByDesc(txtBuscar.Text);
+            }
+            else { l = AlumnoNegocio.GetAll(); }
+            
             return l.Result;
+
         }
         public async void cargarTabla()
         {
@@ -23,6 +30,7 @@ namespace ClienteServicios
             task.Start();
             dataGridView1.DataSource = await task;
         }
+
 
         private void AbmAlumnos_Load(object sender, EventArgs e)
         {
@@ -67,6 +75,11 @@ namespace ClienteServicios
             {
                 MessageBox.Show("Seleccione una fila");
             }
+        }
+
+        private void txtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            cargarTabla();
         }
     }
 }

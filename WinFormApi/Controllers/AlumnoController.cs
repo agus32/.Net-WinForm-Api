@@ -19,6 +19,18 @@ namespace WinFormApi.Controllers
         {
             return _context.Alumnos.ToList();
         }
+
+        [HttpGet("GetByDesc/{descripcion}", Name = "GetByDesc")]
+        public ActionResult<IEnumerable<Alumno>> GetByDesc(string descripcion)
+        {
+            var alumnos = _context.Alumnos
+                .Where(e => e.ApellidoNombre.Contains(descripcion))
+                .ToList();
+
+            return alumnos;
+        }
+        
+
         [HttpGet("{DNI}")]
         public ActionResult<Alumno> GetById(String DNI)
         {
